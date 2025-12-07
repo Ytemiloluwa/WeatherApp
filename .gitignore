@@ -60,3 +60,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Config files with sensitive data
+WeatherApp/WeatherApp/Utilities/Config.swift

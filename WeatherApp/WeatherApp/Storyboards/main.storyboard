@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,7 @@
             <objects>
                 <navigationController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar">
-                        <rect key="frame" x="0.0" y="59" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -26,28 +27,114 @@
         <!--Home View Controller-->
         <scene sceneID="home-scene">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="HomeViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController" storyboardIdentifier="HomeViewController">
+                <viewController storyboardIdentifier="HomeViewController" id="9pv-A4-QxB" customClass="HomeViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="home-view">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Forecast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                                <rect key="frame" x="20" y="212" width="353" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="title-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter city name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="city-textfield">
+                                <rect key="frame" x="40" y="292" width="313" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="textfield-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="search"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="search-button">
+                                <rect key="frame" x="40" y="364" width="313" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="search-button-height"/>
+                                </constraints>
+                                <state key="normal" title="Get Weather"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Get Weather">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="searchButtonTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="search-action"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="favorite-button">
+                                <rect key="frame" x="40" y="432" width="313" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="favorite-button-height"/>
+                                </constraints>
+                                <state key="normal" title="Save as Favorite"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Save as Favorite">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="favoriteButtonTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="favorite-action"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="activity-indicator">
+                                <rect key="frame" x="186.66666666666666" y="518" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="activity-height"/>
+                                    <constraint firstAttribute="width" constant="20" id="activity-width"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="error-label">
+                                <rect key="frame" x="40" y="566" width="313" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="error-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="home-safe-area"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="activity-indicator" firstAttribute="centerX" secondItem="home-view" secondAttribute="centerX" id="activity-centerX"/>
+                            <constraint firstItem="activity-indicator" firstAttribute="top" secondItem="favorite-button" secondAttribute="bottom" constant="36" id="activity-top"/>
+                            <constraint firstItem="error-label" firstAttribute="leading" secondItem="home-safe-area" secondAttribute="leading" constant="40" id="error-leading"/>
+                            <constraint firstItem="error-label" firstAttribute="top" secondItem="activity-indicator" secondAttribute="bottom" constant="28" id="error-top"/>
+                            <constraint firstItem="home-safe-area" firstAttribute="trailing" secondItem="error-label" secondAttribute="trailing" constant="40" id="error-trailing"/>
+                            <constraint firstItem="favorite-button" firstAttribute="leading" secondItem="home-safe-area" secondAttribute="leading" constant="40" id="favorite-leading"/>
+                            <constraint firstItem="favorite-button" firstAttribute="top" secondItem="search-button" secondAttribute="bottom" constant="18" id="favorite-top"/>
+                            <constraint firstItem="home-safe-area" firstAttribute="trailing" secondItem="favorite-button" secondAttribute="trailing" constant="40" id="favorite-trailing"/>
+                            <constraint firstItem="search-button" firstAttribute="leading" secondItem="home-safe-area" secondAttribute="leading" constant="40" id="search-leading"/>
+                            <constraint firstItem="search-button" firstAttribute="top" secondItem="city-textfield" secondAttribute="bottom" constant="28" id="search-top"/>
+                            <constraint firstItem="home-safe-area" firstAttribute="trailing" secondItem="search-button" secondAttribute="trailing" constant="40" id="search-trailing"/>
+                            <constraint firstItem="city-textfield" firstAttribute="leading" secondItem="home-safe-area" secondAttribute="leading" constant="40" id="textfield-leading"/>
+                            <constraint firstItem="city-textfield" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="44" id="textfield-top"/>
+                            <constraint firstItem="home-safe-area" firstAttribute="trailing" secondItem="city-textfield" secondAttribute="trailing" constant="40" id="textfield-trailing"/>
+                            <constraint firstItem="title-label" firstAttribute="leading" secondItem="home-safe-area" secondAttribute="leading" constant="20" id="title-leading"/>
+                            <constraint firstItem="title-label" firstAttribute="top" secondItem="home-safe-area" secondAttribute="top" constant="40" id="title-top"/>
+                            <constraint firstItem="home-safe-area" firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="20" id="title-trailing"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="home-nav-item"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="activity-centerX" id="AU2-LS-kkI"/>
+                        <outlet property="cityTextField" destination="city-textfield" id="32c-pH-Gmx"/>
+                        <outlet property="errorLabel" destination="error-label" id="Y0h-7U-g9U"/>
+                        <outlet property="favoriteButton" destination="favorite-button" id="favorite-outlet"/>
+                        <outlet property="saveFavoriteButton" destination="favorite-button" id="8Km-z7-f36"/>
+                        <outlet property="searchButton" destination="search-button" id="NUg-52-G0t"/>
+                        <outlet property="titleLabel" destination="title-label" id="title-outlet"/>
                         <segue destination="weather-detail-vc" kind="show" identifier="showWeatherDetail" id="weather-detail-segue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="home-first-responder" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="0.0"/>
+            <point key="canvasLocation" x="748.85496183206101" y="0.0"/>
         </scene>
-        <!--Weather Detail View Controller-->
+        <!--View Controller-->
         <scene sceneID="weather-detail-scene">
             <objects>
-                <viewController id="weather-detail-vc" sceneMemberID="viewController" storyboardIdentifier="WeatherDetailViewController">
+                <viewController storyboardIdentifier="WeatherDetailViewController" id="weather-detail-vc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="weather-detail-view">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="weather-detail-safe-area"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,6 +149,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class weatherService: WeatherServiceProtocol {
+class WeatherService: WeatherServiceProtocol {
     
     private let apiKey = Config.apiKey
     

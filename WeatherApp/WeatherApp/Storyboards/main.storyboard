@@ -71,7 +71,7 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="favoriteButtonTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="favorite-action"/>
+                                    <action selector="saveAsFavoriteButtonTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="favorite-action"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="activity-indicator">
@@ -115,12 +115,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="home-nav-item"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="activity-centerX" id="AU2-LS-kkI"/>
-                        <outlet property="cityTextField" destination="city-textfield" id="32c-pH-Gmx"/>
-                        <outlet property="errorLabel" destination="error-label" id="Y0h-7U-g9U"/>
-                        <outlet property="favoriteButton" destination="favorite-button" id="favorite-outlet"/>
-                        <outlet property="saveFavoriteButton" destination="favorite-button" id="8Km-z7-f36"/>
-                        <outlet property="searchButton" destination="search-button" id="NUg-52-G0t"/>
+                        <outlet property="activityIndicator" destination="activity-indicator" id="activity-outlet"/>
+                        <outlet property="cityTextField" destination="city-textfield" id="textfield-outlet"/>
+                        <outlet property="errorLabel" destination="error-label" id="error-outlet"/>
+                        <outlet property="saveFavoriteButton" destination="favorite-button" id="favorite-outlet"/>
+                        <outlet property="searchButton" destination="search-button" id="search-outlet"/>
                         <outlet property="titleLabel" destination="title-label" id="title-outlet"/>
                         <segue destination="weather-detail-vc" kind="show" identifier="showWeatherDetail" id="weather-detail-segue"/>
                     </connections>
@@ -129,17 +128,96 @@
             </objects>
             <point key="canvasLocation" x="748.85496183206101" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Weather Details-->
         <scene sceneID="weather-detail-scene">
             <objects>
-                <viewController storyboardIdentifier="WeatherDetailViewController" id="weather-detail-vc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherDetailViewController" id="weather-detail-vc" customClass="WeatherDetailViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="weather-detail-view">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="weather-icon">
+                                <rect key="frame" x="146.66666666666666" y="212" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="icon-height"/>
+                                    <constraint firstAttribute="width" constant="100" id="icon-width"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAGOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="city-name-label">
+                                <rect key="frame" x="20" y="332" width="353" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="city-name-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="temperature-label">
+                                <rect key="frame" x="20" y="388" width="353" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="temp-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear sky" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="description-label">
+                                <rect key="frame" x="20" y="480" width="353" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="desc-height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="details-stack">
+                                <rect key="frame" x="40" y="552" width="313" height="89"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feels like: 20°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feels-like-label">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity: 65%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="humidity-label">
+                                        <rect key="frame" x="0.0" y="33.666666666666629" width="313" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind: 10 km/h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wind-label">
+                                        <rect key="frame" x="0.0" y="67.333333333333371" width="313" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="weather-detail-safe-area"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="city-name-label" firstAttribute="leading" secondItem="weather-detail-safe-area" secondAttribute="leading" constant="20" id="city-leading"/>
+                            <constraint firstItem="city-name-label" firstAttribute="top" secondItem="weather-icon" secondAttribute="bottom" constant="20" id="city-top"/>
+                            <constraint firstItem="weather-detail-safe-area" firstAttribute="trailing" secondItem="city-name-label" secondAttribute="trailing" constant="20" id="city-trailing"/>
+                            <constraint firstItem="description-label" firstAttribute="leading" secondItem="weather-detail-safe-area" secondAttribute="leading" constant="20" id="desc-leading"/>
+                            <constraint firstItem="description-label" firstAttribute="top" secondItem="temperature-label" secondAttribute="bottom" constant="20" id="desc-top"/>
+                            <constraint firstItem="weather-detail-safe-area" firstAttribute="trailing" secondItem="description-label" secondAttribute="trailing" constant="20" id="desc-trailing"/>
+                            <constraint firstItem="weather-icon" firstAttribute="centerX" secondItem="weather-detail-view" secondAttribute="centerX" id="icon-centerX"/>
+                            <constraint firstItem="weather-icon" firstAttribute="top" secondItem="weather-detail-safe-area" secondAttribute="top" constant="40" id="icon-top"/>
+                            <constraint firstItem="details-stack" firstAttribute="leading" secondItem="weather-detail-safe-area" secondAttribute="leading" constant="40" id="stack-leading"/>
+                            <constraint firstItem="details-stack" firstAttribute="top" secondItem="description-label" secondAttribute="bottom" constant="48" id="stack-top"/>
+                            <constraint firstItem="weather-detail-safe-area" firstAttribute="trailing" secondItem="details-stack" secondAttribute="trailing" constant="40" id="stack-trailing"/>
+                            <constraint firstItem="temperature-label" firstAttribute="leading" secondItem="weather-detail-safe-area" secondAttribute="leading" constant="20" id="temp-leading"/>
+                            <constraint firstItem="temperature-label" firstAttribute="top" secondItem="city-name-label" secondAttribute="bottom" constant="20" id="temp-top"/>
+                            <constraint firstItem="weather-detail-safe-area" firstAttribute="trailing" secondItem="temperature-label" secondAttribute="trailing" constant="20" id="temp-trailing"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="weather-detail-nav-item"/>
+                    <navigationItem key="navigationItem" title="Weather Details" id="weather-detail-nav-item"/>
+                    <connections>
+                        <outlet property="cityLabel" destination="city-name-label" id="J9t-Pe-jaZ"/>
+                        <outlet property="descriptionLabel" destination="description-label" id="ZA4-yR-Z94"/>
+                        <outlet property="feelsLikeLabel" destination="feels-like-label" id="XuO-wC-e50"/>
+                        <outlet property="humidityLabel" destination="humidity-label" id="O6E-nV-GTy"/>
+                        <outlet property="temperatureLabel" destination="temperature-label" id="tBi-3q-xPe"/>
+                        <outlet property="weatherIconImageView" destination="weather-icon" id="E2z-OA-VDJ"/>
+                        <outlet property="windLabel" destination="wind-label" id="LVC-RM-g6V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weather-detail-first-responder" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -147,6 +225,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -109,7 +109,6 @@ class HomeViewController: UIViewController{
     private func setupUI() {
         
         title = "Weather"
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         //style UI buttons
         searchButton.layer.cornerRadius = 8

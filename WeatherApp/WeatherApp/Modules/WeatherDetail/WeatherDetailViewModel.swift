@@ -31,6 +31,13 @@ class WeatherDetailViewModel {
         weatherData.humidityString
     }
     
+    var windspeed: String {
+        if let speed = weatherData.wind.speed {
+            return String(format: "Wind: %.1f km/h", speed)
+        }
+        return "Wind: N/A"
+    }
+    
     init(weatherData: WeatherData) {
         self.weatherData = weatherData
     }

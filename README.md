@@ -1,5 +1,17 @@
 # WeatherApp Take Home
 
+## Dark Mode
+<div align="center" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto">
+  <img src="https://github.com/user-attachments/assets/7e1430f4-b9a6-4d93-a102-95e41aea68ae" width="280" />
+  <img src="https://github.com/user-attachments/assets/1c610871-94ce-4cfb-b7a7-33805cd7942f" width="280" />
+</div>
+
+## Light Mode
+<div align="center" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto">
+  <img src="https://github.com/user-attachments/assets/cdce4227-56b7-4879-aec1-ef73169d199a" width="280" />
+  <img src="https://github.com/user-attachments/assets/08933c44-179e-4855-a3b7-74af76ebc3a6" width="280" />
+</div>
+
 ## Features
 - MVVM Architecture
 - Storyboard UI

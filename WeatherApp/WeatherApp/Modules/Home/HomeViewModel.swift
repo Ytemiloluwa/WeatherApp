@@ -17,19 +17,19 @@ class HomeViewModel {
     private let weatherService: WeatherServiceProtocol
     private let cityStorage: CityStorageProtocol
     
-    private var cityName: String = "" {
+    var cityName: String = "" {
         didSet {
             didUpdateCityName?(cityName)
         }
     }
     
-    private var isLoading: Bool = false {
+    var isLoading: Bool = false {
         didSet {
             didUpdateLoading?(isLoading)
         }
     }
     
-    private var errorMessage: String? {
+    var errorMessage: String? {
         didSet {
             didUpdateError?(errorMessage)
         }

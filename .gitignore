@@ -61,5 +61,5 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-# Config files with sensitive data
+# Config files with sensitive data(api key)
 WeatherApp/WeatherApp/Utilities/Config.swift
